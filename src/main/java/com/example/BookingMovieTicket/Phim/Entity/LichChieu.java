@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.BookingMovieTicket.Common.Entity.BaseEntity;
@@ -25,8 +26,8 @@ import lombok.Setter;
 @Entity
 @Table(name="lich_chieu")
 public class LichChieu extends BaseEntity {
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cum_rap_id")
+	@OneToOne
+	@JoinColumn(name="cum_rap_id")
 	private CumRap cumRap;
 	
 	private LocalDateTime ngayChieu;
@@ -40,6 +41,7 @@ public class LichChieu extends BaseEntity {
 	@JsonIgnore
 	@OneToMany(mappedBy = "id")
 	private Set<XuatChieu> xuatChieu;
+	
 
 
 

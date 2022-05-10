@@ -50,6 +50,7 @@ public class Phim extends BaseEntity {
 	@Builder.Default
 	private Set<LichChieu> lichChieu=new HashSet<LichChieu>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "id")
 	private Set<XuatChieu> xuatChieu;
 
@@ -62,6 +63,7 @@ public class Phim extends BaseEntity {
 	@NotNull
 	private LocalDateTime ngayPhatHanh;
 	private Integer rating;
+	@JsonIgnore
 	@OneToMany(mappedBy = "id")
 	private List<Ve> ve;
 	

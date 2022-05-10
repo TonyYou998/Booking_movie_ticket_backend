@@ -24,6 +24,14 @@ public interface PhimService {
 
 	Phim addPhimLichChieu( AddPhimLichChieuDto dto);
 
+	List<Phim> getPhimByLichChieuId(Long id);
+
+	List<Phim> getPhimByCumRapId(Long id);
+
+	Phim getPhimById(Long id);
+
+	
+
 
 
 }

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -40,9 +41,10 @@ public class CumRap extends BaseEntity {
 	@JsonIgnore
 	@OneToMany(mappedBy = "id")
 	private Set<Rap> rap;
-	@JsonIgnore
-	@OneToMany(mappedBy = "id")
-	private Set<LichChieu> lichChieu;
+//	@JsonIgnore
+//	@OneToOne(cascade =CascadeType.ALL)
+//	@JoinColumn(name="lich_chieu_id",referencedColumnName = "id")
+//	private LichChieu  lichChieu;
 
 	
 

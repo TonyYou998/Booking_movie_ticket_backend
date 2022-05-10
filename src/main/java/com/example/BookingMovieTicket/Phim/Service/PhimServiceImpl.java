@@ -17,17 +17,20 @@ import com.example.BookingMovieTicket.Phim.Dto.addLichChieuDto;
 import com.example.BookingMovieTicket.Phim.Entity.LichChieu;
 import com.example.BookingMovieTicket.Phim.Entity.Phim;
 import com.example.BookingMovieTicket.Phim.Repository.LichChieuRepository;
+import com.example.BookingMovieTicket.Phim.Repository.PhimLichChieuRepository;
 import com.example.BookingMovieTicket.Phim.Repository.PhimRepository;
 @Service
 public class PhimServiceImpl implements PhimService {
 	private PhimRepository phimRepository;
 	private LichChieuRepository lichChieuRepository;
 	private CumRapRepository cumRapRepository;
-	public PhimServiceImpl(PhimRepository repository,LichChieuRepository lichChieuRepository,CumRapRepository cumRapRepository) {
+	private PhimLichChieuRepository phimLichChieuRepository;
+	public PhimServiceImpl(PhimRepository repository,LichChieuRepository lichChieuRepository,CumRapRepository cumRapRepository,PhimLichChieuRepository phimLichChieuRepository) {
 		// TODO Auto-generated constructor stub
 		this.phimRepository=repository;
 		this.lichChieuRepository=lichChieuRepository;
 		this.cumRapRepository=cumRapRepository;
+		this.phimLichChieuRepository=phimLichChieuRepository;
 	}
 	@Override
 	public Phim addNewPhim(AddPhimDto dto) {
@@ -70,13 +73,36 @@ public class PhimServiceImpl implements PhimService {
 	@Override
 	public Phim addPhimLichChieu(AddPhimLichChieuDto dto) {
 		// TODO Auto-generated method stub
-		Phim newPhim=new Phim();
+		Phim phim=phimRepository.findById(dto.getPhimId()).get();
+		
 		LichChieu lichChieu=lichChieuRepository.findById(dto.getLichChieuId()).get();
 		
-		newPhim.setPhimLichChieu(lichChieu);
+		phim.setPhimLichChieu(lichChieu);
+		phimRepository.save(phim);
 		
-		return null;
+		
+		return phim;
 	}
+	@Override
+	public List<Phim> getPhimByLichChieuId(Long id) {
+		// TODO Auto-generated method stub
+		List<Phim> lstPhim=phimLichChieuRepository.findAllPhimByLichChieuId(id);
+		return lstPhim;
+	}
+	@Override
+	public List<Phim> getPhimByCumRapId(Long id) {
+		// TODO Auto-generated method stub
+		List<Phim> lstPhim=phimLichChieuRepository.findAllPhimByCumRap(id);
+		return lstPhim;
+	}
+	@Override
+	public Phim getPhimById(Long id) {
+		// TODO Auto-generated method stub
+		Phim phim=phimRepository.findById(id).get();
+		return phim;
+	}
+	
+
 
 
 }

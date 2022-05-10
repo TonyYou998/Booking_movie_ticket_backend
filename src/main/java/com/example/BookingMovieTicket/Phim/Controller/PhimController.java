@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,13 +44,13 @@ public class PhimController {
 		  return dsPhim;
 		
 	}
-	@PostMapping("/lich-chieu/add")
+	@PostMapping("/lich-chieu")
 	public Object addLichChieu(@Valid @RequestBody addLichChieuDto dto) {
 		LichChieu newLichChieu=phimService.addLichChieu(dto);
 		
 		return newLichChieu;
 	}
-	@PostMapping("/add-phim-lich-chieu")
+	@PostMapping("/add-phim-lich-chieu/add")
 	public Object addPhimLichChieu(@Valid @RequestBody AddPhimLichChieuDto dto,BindingResult result) {
 			if(result.hasErrors()) {
 				return "loi";
@@ -60,6 +61,28 @@ public class PhimController {
 		
 		
 	}
+	@GetMapping("/lich-chieu/{id}")
+	public Object getPhimTheoLichChieu(@PathVariable("id") Long id ) {
+		
+		List<Phim> lstPhim=phimService.getPhimByLichChieuId(id);
+		
+		return lstPhim;
+	}
+	@GetMapping("/cum-rap/{id}")
+	public Object getPhimTheoHeThongRap(@PathVariable("id") Long id) {
+		List<Phim> lstPhim=phimService.getPhimByCumRapId(id);
+		return lstPhim;
+		
+		
+	}
+	@GetMapping("/{id}")
+	public Object getDetailPhim(@PathVariable("id") Long id) {
+		Phim phim=phimService.getPhimById(id);
+		return phim;
+		
+		
+	}
+	
 	
 
 }
