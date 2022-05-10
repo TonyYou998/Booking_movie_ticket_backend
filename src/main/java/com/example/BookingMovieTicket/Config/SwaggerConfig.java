@@ -29,9 +29,9 @@ public class SwaggerConfig {
 	
 	private ApiInfo apiInfo() {
 		return  new ApiInfoBuilder()
-				.title("Booking movie ticket")
-				.description("this is a complete project")
-				.contact(new Contact( "Tony You", "something", "tonyyou998@gmail.com"))
+				.title("Booking movie ticket api")
+				.description("Booking movie ticket api for booking movie ticket web")
+				.contact(new Contact( "Tan Vuu", "Hi, i'm a software engineer", "tanvuu998@gmail.com"))
 				.license("MIT")
 				.build();
 		
