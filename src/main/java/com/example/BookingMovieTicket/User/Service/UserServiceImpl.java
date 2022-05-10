@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.BookingMovieTicket.User.Dto.CreateUserDto;
 import com.example.BookingMovieTicket.User.Dto.UpdateUserDto;
 import com.example.BookingMovieTicket.User.Dto.UserDto;
+import com.example.BookingMovieTicket.User.Entity.Admin;
 import com.example.BookingMovieTicket.User.Entity.User;
 import com.example.BookingMovieTicket.User.Repository.UserRepository;
 @Service
@@ -73,6 +74,12 @@ public class UserServiceImpl implements UserService {
 		
 		}
 		return "failed";
+	}
+	@Override
+	public Admin getAdminAccount() {
+		// TODO Auto-generated method stub
+		Admin admin=new Admin("admin", "1234");
+		return admin;
 	}
 	
 
