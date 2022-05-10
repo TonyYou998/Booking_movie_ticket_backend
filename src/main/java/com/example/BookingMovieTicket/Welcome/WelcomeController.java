@@ -13,10 +13,10 @@ public class WelcomeController {
 	public Object welcome() {
 		return "Welcome to booking movie project this project is for education purpose";
 	}
-	@GetMapping("/welcome/admin")
+	@GetMapping("/getadmin")
 	public Object getAdminAccount() {
-		Admin u=UserService.getAdminAccount();
-		return u;
+//		Admin u=UserService.getAdminAccount();
+		return "username:admin \n password:1234";
 		
 	}
 
