@@ -17,7 +17,7 @@ import com.example.BookingMovieTicket.HeThongRap.Service.GheService;
 import com.example.BookingMovieTicket.HeThongRap.Service.RapService;
 
 @RestController
-@RequestMapping("/api/v1/rap")
+@RequestMapping("/api/v1")
 public class RapController {
 	private RapService service;
 	private GheService gheService;
@@ -26,7 +26,7 @@ public class RapController {
 		this.service=service;
 		this.gheService=gheService;
 	}
-	@PostMapping("/create")
+	@PostMapping("/admin/rap/create")
 	public Object createRap(@Valid @RequestBody CreateRapDto dto,BindingResult err) {
 		if(err.hasErrors())
 			return "loi";
@@ -42,7 +42,7 @@ public class RapController {
 		
 		
 	}
-	@PostMapping("/ghe/create")
+	@PostMapping("/admin/rap/ghe/create")
 	public Object createSeat(@Valid @RequestBody CreateSeatDto dto,BindingResult err) {
 		if(err.hasErrors())
 			return "loi";

@@ -22,7 +22,7 @@ import com.example.BookingMovieTicket.Phim.Entity.Phim;
 import com.example.BookingMovieTicket.Phim.Service.PhimService;
 
 @RestController
-@RequestMapping("/api/v1/phim")
+@RequestMapping("/api/v1")
 public class PhimController {
 	PhimService phimService;
 	
@@ -30,7 +30,7 @@ public class PhimController {
 		// TODO Auto-generated constructor stub
 		this.phimService=phimService;
 	}
-	@PostMapping("/add")
+	@PostMapping("/admin/phim/add")
 	public Object addPhim(@Valid @RequestBody AddPhimDto dto) {
 		
 		Phim newPhim=phimService.addNewPhim(dto);
@@ -38,19 +38,19 @@ public class PhimController {
 		return newPhim;
 		
 	}
-	@GetMapping("/get-phim")
+	@GetMapping("/user/phim/get-phim")
 	public Object getPhim() {
 		  List<PhimDto> dsPhim=phimService.getAllPhim();
 		  return dsPhim;
 		
 	}
-	@PostMapping("/lich-chieu")
+	@PostMapping("/admin/admin/phim/lichchieu")
 	public Object addLichChieu(@Valid @RequestBody addLichChieuDto dto) {
 		LichChieu newLichChieu=phimService.addLichChieu(dto);
 		
 		return newLichChieu;
 	}
-	@PostMapping("/add-phim-lich-chieu/add")
+	@PostMapping("/admin/phim/add-phim-lich-chieu/add")
 	public Object addPhimLichChieu(@Valid @RequestBody AddPhimLichChieuDto dto,BindingResult result) {
 			if(result.hasErrors()) {
 				return "loi";
@@ -61,14 +61,14 @@ public class PhimController {
 		
 		
 	}
-	@GetMapping("/lich-chieu/{id}")
+	@GetMapping("/user/phim/lich-chieu/{id}")
 	public Object getPhimTheoLichChieu(@PathVariable("id") Long id ) {
 		
 		List<Phim> lstPhim=phimService.getPhimByLichChieuId(id);
 		
 		return lstPhim;
 	}
-	@GetMapping("/cum-rap/{id}")
+	@GetMapping("/user/cum-rap/{id}")
 	public Object getPhimTheoHeThongRap(@PathVariable("id") Long id) {
 		List<Phim> lstPhim=phimService.getPhimByCumRapId(id);
 		return lstPhim;

@@ -25,7 +25,7 @@ public class LoginController {
 		this.authenticationManager=athentication;
 		this.jwtUtils=jwtUtils;
 	}
-	@PostMapping("/login")
+	@PostMapping("/user/login")
 	public Object login(@Valid @RequestBody LoginDto dto,BindingResult err) {
 		if(err.hasErrors())
 			return "loi";

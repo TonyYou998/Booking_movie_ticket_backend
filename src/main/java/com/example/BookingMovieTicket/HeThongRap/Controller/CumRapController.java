@@ -12,7 +12,7 @@ import com.example.BookingMovieTicket.HeThongRap.Dto.CreateCumRapDto;
 import com.example.BookingMovieTicket.HeThongRap.Entity.CumRap;
 import com.example.BookingMovieTicket.HeThongRap.Service.CumRapService;
 @RestController
-@RequestMapping("/api/v1/cum_rap")
+@RequestMapping("/api/v1")
 public class CumRapController {
 	private CumRapService service;
 	public CumRapController(CumRapService service) {
@@ -20,7 +20,7 @@ public class CumRapController {
 		this.service=service;
 	}
 	
-	@PostMapping("/create")
+	@PostMapping("/admin/cumrap/create")
 	public Object createCumRap(@Valid @RequestBody CreateCumRapDto dto,BindingResult err) {
 		if(err.hasErrors())
 			return "loi";

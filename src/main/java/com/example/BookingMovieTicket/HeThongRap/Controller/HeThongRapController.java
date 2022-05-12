@@ -15,7 +15,7 @@ import com.example.BookingMovieTicket.HeThongRap.Service.CumRapService;
 import com.example.BookingMovieTicket.HeThongRap.Service.HeThongRapService;
 
 @RestController
-@RequestMapping("/api/v1/he_thong_rap")
+@RequestMapping("/api/v1")
 public class HeThongRapController {
 	
 	private HeThongRapService heThongRapService;
@@ -26,7 +26,7 @@ public class HeThongRapController {
 		
 		
 	}
-	@PostMapping("/create")
+	@PostMapping("/admin/he-thong-rap/create")
 	public Object createHeThongRap(@Valid @RequestBody CreateHeThongRapDto dto,BindingResult err){
 		if(err.hasErrors())
 			return "loi";

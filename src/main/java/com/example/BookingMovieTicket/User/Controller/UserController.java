@@ -24,7 +24,7 @@ import com.example.BookingMovieTicket.User.Entity.User;
 import com.example.BookingMovieTicket.User.Service.UserService;
 
 @RestController
-@RequestMapping("api/v1/user")
+@RequestMapping("api/v1/")
 public class UserController {
 	
 	private UserService service;
@@ -35,7 +35,7 @@ public class UserController {
 	 
 
 
-	@PostMapping("/register")
+	@PostMapping("user/register")
 	 @ResponseBody
 	 public Object createUser(@Valid @RequestBody CreateUserDto dto,BindingResult err) {
 		 if(err.hasErrors()) {
@@ -47,20 +47,20 @@ public class UserController {
 		return "loi";
 		 
 	 }
-	 @GetMapping
+	 @GetMapping("/admin/get-user")
 	 public Object getAllUser() {
 		 List<UserDto> users=service.findAllUser();
 		 return users;
 		 
 	 }
-	 @DeleteMapping("/delete/{id}")
+	 @DeleteMapping("admin/delete/{id}")
 	 public Object deleteUser(@PathVariable("id") Long id) {
 		  String result= service.deleteById(id);
 		return result ;
 		 
 	 }
 	 
-	 @PutMapping("update")
+	 @PutMapping("admin/update")
 	 @ResponseBody
 	 public Object updateUser(@Valid @RequestBody UpdateUserDto dto,BindingResult err) {
 		 if(err.hasErrors())

@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.example.BookingMovieTicket.Common.Entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public class Rap extends BaseEntity{
 	@JoinColumn(name = "cum_rap_id")
 	private CumRap cumRap;
 	@OneToMany(mappedBy = "id")
+	@JsonIgnore
 	private Set<Ghe> ghe;
 
 	

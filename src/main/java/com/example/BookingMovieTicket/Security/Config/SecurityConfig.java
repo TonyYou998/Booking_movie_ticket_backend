@@ -51,15 +51,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
 		http.antMatcher("/api/v1/**").
 		authorizeRequests().
-//		api ko cần đăng nhập
-		antMatchers("/api/v1/user/register","/api/v1/login","/api/v1/phim/get-phim","/api/v1/cum_rap/create","/api/v1/phim/lich-chieu/{id}","/api/v1/phim/cum-rap/{id}","/api/v1/phim/{id}")
-		.permitAll()
 //		admin mới dc vào
-		.antMatchers("/api/v1/user/**","/api/v1/he_thong_rap/**","/api/v1/phim/**")
+		antMatchers("/api/v1/admin/**")
 		.hasAnyRole("Admin")
+//		api ko cần đăng nhập
+		.antMatchers("/api/v1/user/**")
+		.permitAll();
+
 //		các api cần đăng nhập
-		.anyRequest()
-		.authenticated();
+//		.anyRequest()
+//		.authenticated();
 
 
 
