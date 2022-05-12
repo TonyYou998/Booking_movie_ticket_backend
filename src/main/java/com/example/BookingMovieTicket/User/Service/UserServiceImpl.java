@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 		
 		try {
 			User newUser=new User();
-			newUser.setRole("ROLE_Admin");
+			newUser.setRole("ROLE_Client");
 			newUser.setUsername(dto.getUsername());
 			newUser.setPassword(encoder.encode(dto.getPassword()));
 			newUser.setEmail(dto.getEmail());
