@@ -44,7 +44,7 @@ public class PhimController {
 		  return dsPhim;
 		
 	}
-	@PostMapping("/admin/admin/phim/lichchieu")
+	@PostMapping("/admin/phim/lichchieu")
 	public Object addLichChieu(@Valid @RequestBody addLichChieuDto dto) {
 		LichChieu newLichChieu=phimService.addLichChieu(dto);
 		

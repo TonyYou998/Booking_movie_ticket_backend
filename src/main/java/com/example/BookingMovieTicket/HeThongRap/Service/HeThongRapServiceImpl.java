@@ -1,5 +1,7 @@
 package com.example.BookingMovieTicket.HeThongRap.Service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.BookingMovieTicket.HeThongRap.Dto.CreateHeThongRapDto;
@@ -32,6 +34,14 @@ public class HeThongRapServiceImpl implements HeThongRapService {
 		}
 		
 		
+	}
+
+
+	@Override
+	public List<HeThongRap> getAllHeThongRap() {
+		// TODO Auto-generated method stub
+		List<HeThongRap> lstHeThongRap=repository.findAll();
+		return lstHeThongRap;
 	}
 	
 	
