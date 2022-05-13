@@ -55,7 +55,7 @@ public class HeThongRapController {
 				Files.createDirectories(folderPath);
 			}
 			Path path=Paths.get(userDirectory+uploadDir+fileName);
-			String savedPath=path.toAbsolutePath().toString();
+			final String savedPath="https://bookingmovieapi.herokuapp.com/"+fileName;
 			
 			
 			Files.write(path, file.getBytes());
