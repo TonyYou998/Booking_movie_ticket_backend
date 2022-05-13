@@ -1,5 +1,7 @@
 package com.example.BookingMovieTicket.HeThongRap.Service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.BookingMovieTicket.HeThongRap.Dto.CreateCumRapDto;
@@ -39,6 +41,12 @@ public class CumRapServiceImpl implements CumRapService {
 		}
 		
 		
+	}
+	@Override
+	public List<CumRap> findListCumRapByHrThongRapId(String cumRapId) {
+		// TODO Auto-generated method stub
+		List<CumRap> lstCumRap=repository.findListCumRapByHeThongRapId(cumRapId);
+		return lstCumRap;
 	}
 
 }

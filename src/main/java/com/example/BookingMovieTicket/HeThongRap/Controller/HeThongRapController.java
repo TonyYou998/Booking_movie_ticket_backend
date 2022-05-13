@@ -39,7 +39,8 @@ public class HeThongRapController {
 		
 	}
 	@PostMapping("/admin/he-thong-rap/create")
-	public Object createHeThongRap( @RequestParam("createHeThongRapDto") String model,@RequestParam("file") MultipartFile file){
+	public Object createHeThongRap(  @RequestParam("createHeThongRapDto") String model,@RequestParam("file") MultipartFile file){
+		
 		
 		
 		
