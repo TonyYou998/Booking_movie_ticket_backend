@@ -21,6 +21,7 @@ import com.example.BookingMovieTicket.HeThongRap.Entity.CumRap;
 import com.example.BookingMovieTicket.HeThongRap.Entity.HeThongRap;
 import com.example.BookingMovieTicket.HeThongRap.Service.CumRapService;
 import com.example.BookingMovieTicket.HeThongRap.Service.HeThongRapService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
@@ -38,15 +39,36 @@ public class HeThongRapController {
 		
 	}
 	@PostMapping("/admin/he-thong-rap/create")
-	public Object createHeThongRap(@Valid @RequestBody CreateHeThongRapDto dto,BindingResult err){
-		if(err.hasErrors())
-			return "loi";
+	public Object createHeThongRap( @RequestParam("createHeThongRapDto") String model,@RequestParam("file") MultipartFile file){
 		
-		HeThongRap newHeThongRap=heThongRapService.createHeThongRap(dto);
 		
-		if(newHeThongRap !=null)
+		
+		try {
+			ObjectMapper mapper=new ObjectMapper();
+			CreateHeThongRapDto dto=mapper.readValue(model, CreateHeThongRapDto.class);
+		
+			String fileName=file.getOriginalFilename();
+//			duong dan toi thu muc chua prj
+			String userDirectory=Paths.get("").toAbsolutePath().toString();
+			Path folderPath=Paths.get(userDirectory+uploadDir);
+			if(!Files.exists(folderPath)) {
+				Files.createDirectories(folderPath);
+			}
+			Path path=Paths.get(userDirectory+uploadDir+fileName);
+			String savedPath=path.toAbsolutePath().toString();
+			
+			
+			Files.write(path, file.getBytes());
+			HeThongRap newHeThongRap=heThongRapService.createHeThongRap(dto,savedPath);
 			return newHeThongRap;
-		return "loi";
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return "loi";
+		}
+	
+		
+		
 		
 		
 	}
@@ -56,28 +78,28 @@ public class HeThongRapController {
 		 return lstHeThongRap;
 		
 	}
-	@PostMapping("/user/he-thong-rap/upload")
-	public Object uploadHeThongRapLogo(@RequestParam("file") MultipartFile file) {
-		try {
-			String fileName=file.getOriginalFilename();
-//			duong dan toi thu muc chua prj
-			String userDirectory=Paths.get("").toAbsolutePath().toString();
-			Path folderPath=Paths.get(userDirectory+uploadDir);
-			if(!Files.exists(folderPath)) {
-				Files.createDirectories(folderPath);
-			}
-			Path path=Paths.get(userDirectory+uploadDir+fileName);
-			
-			Files.write(path, file.getBytes());
-			return "upload success";
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return "loi";
-		}
-		
-		
-	}
+//	@PostMapping("/user/he-thong-rap/upload")
+//	public Object uploadHeThongRapLogo(@RequestParam("file") MultipartFile file) {
+//		try {
+//			String fileName=file.getOriginalFilename();
+////			duong dan toi thu muc chua prj
+//			String userDirectory=Paths.get("").toAbsolutePath().toString();
+//			Path folderPath=Paths.get(userDirectory+uploadDir);
+//			if(!Files.exists(folderPath)) {
+//				Files.createDirectories(folderPath);
+//			}
+//			Path path=Paths.get(userDirectory+uploadDir+fileName);
+//			
+//			Files.write(path, file.getBytes());
+//			return "upload success";
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//			return "loi";
+//		}
+//		
+//		
+//	}
 	
 
 }

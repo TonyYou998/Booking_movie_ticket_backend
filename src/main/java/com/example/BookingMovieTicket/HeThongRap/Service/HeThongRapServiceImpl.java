@@ -18,14 +18,14 @@ public class HeThongRapServiceImpl implements HeThongRapService {
 	
 	
 	@Override
-	public HeThongRap createHeThongRap(CreateHeThongRapDto dto) {
+	public HeThongRap createHeThongRap(CreateHeThongRapDto dto,String savedPath) {
 		// TODO Auto-generated method stub
 		
 		
 		try {
 			HeThongRap newHeThongRap=new HeThongRap();
 			newHeThongRap.setTenHeThongRap(dto.getTenHeThongRap());
-			newHeThongRap.setHinhAnh(dto.getHinhAnh());
+			newHeThongRap.setHinhAnh(savedPath);
 			return repository.save(newHeThongRap);
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -9,7 +9,7 @@ import com.example.BookingMovieTicket.HeThongRap.Entity.HeThongRap;
 
 public interface HeThongRapService {
 
-	HeThongRap createHeThongRap(CreateHeThongRapDto dto);
+	HeThongRap createHeThongRap(CreateHeThongRapDto dto, String savedPath);
 
 	List<HeThongRap> getAllHeThongRap();
 	

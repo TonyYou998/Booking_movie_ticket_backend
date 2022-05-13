@@ -11,7 +11,7 @@ public class CreateHeThongRapDto {
 	@NotBlank
 	private String tenHeThongRap;
 	
-	private String hinhAnh;
+
 	
 	
 }
