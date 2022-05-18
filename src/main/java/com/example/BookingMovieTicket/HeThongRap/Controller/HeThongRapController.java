@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class HeThongRapController {
 	
 	private HeThongRapService heThongRapService;
-	private final String uploadDir="\\src\\main\\resources\\static\\upload\\";
+	private final String uploadDir="/src/main/resources/static/upload/";
 	private final String domainName="https://bookingmovieapi.herokuapp.com/";
 //	private final String domainName="http://localhost:8080/";
 	public HeThongRapController(HeThongRapService heThongRapService ) {
@@ -66,7 +66,7 @@ public class HeThongRapController {
 			return newHeThongRap;
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return "loi";
 		}
 	
