@@ -30,8 +30,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class HeThongRapController {
 	
 	private HeThongRapService heThongRapService;
-	private final String uploadDir="/src/main/resources/static/";
-
+	private final String uploadDir="\\src\\main\\resources\\static\\upload\\";
+//	private final String domainName="https://bookingmovieapi.herokuapp.com/";
+	private final String domainName="http://localhost:8080/";
 	public HeThongRapController(HeThongRapService heThongRapService ) {
 		// TODO Auto-generated constructor stub
 		this.heThongRapService=heThongRapService;
@@ -56,7 +57,8 @@ public class HeThongRapController {
 				Files.createDirectories(folderPath);
 			}
 			Path path=Paths.get(userDirectory+uploadDir+fileName);
-			final String savedPath="https://bookingmovieapi.herokuapp.com/"+fileName;
+			System.out.println(userDirectory+uploadDir+fileName);
+			final String savedPath=domainName+fileName;
 			
 			
 			Files.write(path, file.getBytes());
