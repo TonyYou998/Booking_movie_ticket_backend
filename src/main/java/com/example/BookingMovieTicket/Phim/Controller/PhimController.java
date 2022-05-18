@@ -32,8 +32,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class PhimController {
 	PhimService phimService;
 	private final String uploadDir="/src/main/resources/static/upload/";
-	private final String domainName="http://localhost:8080/";
-//	private final String domainName="https://bookingmovieapi.herokuapp.com/";
+//	private final String domainName="http://localhost:8080/";
+	private final String domainName="https://bookingmovieapi.herokuapp.com/";
 
 	public  PhimController(PhimService phimService) {
 		// TODO Auto-generated constructor stub

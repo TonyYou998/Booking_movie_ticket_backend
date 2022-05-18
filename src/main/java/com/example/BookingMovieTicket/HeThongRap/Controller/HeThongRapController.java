@@ -31,8 +31,8 @@ public class HeThongRapController {
 	
 	private HeThongRapService heThongRapService;
 	private final String uploadDir="\\src\\main\\resources\\static\\upload\\";
-//	private final String domainName="https://bookingmovieapi.herokuapp.com/";
-	private final String domainName="http://localhost:8080/";
+	private final String domainName="https://bookingmovieapi.herokuapp.com/";
+//	private final String domainName="http://localhost:8080/";
 	public HeThongRapController(HeThongRapService heThongRapService ) {
 		// TODO Auto-generated constructor stub
 		this.heThongRapService=heThongRapService;
