@@ -10,7 +10,7 @@ import com.example.BookingMovieTicket.HeThongRap.Entity.CumRap;
 @Repository
 public interface CumRapRepository extends JpaRepository<CumRap, Long> {
 	
-	@Query(value="select * from heroku_a0664cfe3265359.cum_rap cr where cr.he_thong_rap_id=?1",nativeQuery = true)
+	@Query(value="select * from heroku_12d5073315a2c6d.cum_rap cr where cr.he_thong_rap_id=?1",nativeQuery = true)
 	List<CumRap> findListCumRapByHeThongRapId(String cumRapId);
 		
 
