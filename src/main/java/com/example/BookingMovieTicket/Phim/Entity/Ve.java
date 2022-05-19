@@ -26,9 +26,9 @@ public class Ve extends BaseEntity  {
 	@JoinColumn(name = "user_id")
 	
 	private User user;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "phim_id") 
-	private Phim phim;
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "phim_id") 
+//	private Phim phim;
 
 
 	

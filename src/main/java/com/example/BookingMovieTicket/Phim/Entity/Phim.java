@@ -63,9 +63,9 @@ public class Phim extends BaseEntity {
 	@NotNull
 	private LocalDateTime ngayPhatHanh;
 	private Integer rating;
-	@JsonIgnore
-	@OneToMany(mappedBy = "id")
-	private List<Ve> ve;
+//	@JsonIgnore
+//	@OneToMany(mappedBy = "id")
+//	private List<Ve> ve;
 	
 	public void setPhimLichChieu(LichChieu lichChieu) {
 		this.lichChieu.add(lichChieu);
