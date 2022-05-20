@@ -19,11 +19,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.BookingMovieTicket.Phim.Dto.AddPhimDto;
 import com.example.BookingMovieTicket.Phim.Dto.AddPhimLichChieuDto;
+import com.example.BookingMovieTicket.Phim.Dto.AddXuatChieuDto;
 import com.example.BookingMovieTicket.Phim.Dto.PhimDto;
 import com.example.BookingMovieTicket.Phim.Dto.addLichChieuDto;
 
 import com.example.BookingMovieTicket.Phim.Entity.LichChieu;
 import com.example.BookingMovieTicket.Phim.Entity.Phim;
+import com.example.BookingMovieTicket.Phim.Entity.XuatChieu;
 import com.example.BookingMovieTicket.Phim.Service.PhimService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -108,6 +110,15 @@ public class PhimController {
 		Phim phim=phimService.getPhimById(id);
 		return phim;
 		
+		
+	}
+	@PostMapping("/admin/phim/add-xuat-chieu-lich-chieu/add")
+	public Object addXuatChieuVaoLichChieu(@Valid @RequestBody AddXuatChieuDto dto,BindingResult result) {
+		if(result.hasErrors())
+			return "Loi";
+		XuatChieu xuatChieu= phimService.addXuatChieu(dto);
+		
+		return xuatChieu;
 		
 	}
 	
