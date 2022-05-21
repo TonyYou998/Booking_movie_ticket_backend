@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.example.BookingMovieTicket.Common.Entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +31,7 @@ public class XuatChieu extends BaseEntity{
 	@JoinColumn(name = "lich_chieu_id")
 	private LichChieu lichChieu;
 	@OneToMany(mappedBy = "id")
-	
+	@JsonIgnore
 	private Set<Ve> ve;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="phim_id")

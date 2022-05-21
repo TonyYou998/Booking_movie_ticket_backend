@@ -12,6 +12,7 @@ import com.example.BookingMovieTicket.HeThongRap.Repository.CumRapRepository;
 import com.example.BookingMovieTicket.Phim.Dto.AddPhimDto;
 import com.example.BookingMovieTicket.Phim.Dto.AddPhimLichChieuDto;
 import com.example.BookingMovieTicket.Phim.Dto.AddXuatChieuDto;
+import com.example.BookingMovieTicket.Phim.Dto.LayXuatChieuTheoPhimVaCumRapDto;
 import com.example.BookingMovieTicket.Phim.Dto.PhimDto;
 import com.example.BookingMovieTicket.Phim.Dto.addLichChieuDto;
 
@@ -125,6 +126,12 @@ public class PhimServiceImpl implements PhimService {
 		
 		
 		
+	}
+	@Override
+	public List<XuatChieu> findXuatChieuByPhimIdCumRapId(Long phimId,Long cumRapId) {
+		// TODO Auto-generated method stub
+		List<XuatChieu> lstXuatChieu=xuatChieuRepository.findXuatChieuByPhimIdCumRapId(phimId,cumRapId);
+		return lstXuatChieu;
 	}
 	
 

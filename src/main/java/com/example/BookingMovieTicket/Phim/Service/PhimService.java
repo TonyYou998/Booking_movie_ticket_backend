@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import com.example.BookingMovieTicket.Phim.Dto.AddPhimDto;
 import com.example.BookingMovieTicket.Phim.Dto.AddPhimLichChieuDto;
 import com.example.BookingMovieTicket.Phim.Dto.AddXuatChieuDto;
+import com.example.BookingMovieTicket.Phim.Dto.LayXuatChieuTheoPhimVaCumRapDto;
 import com.example.BookingMovieTicket.Phim.Dto.PhimDto;
 import com.example.BookingMovieTicket.Phim.Dto.addLichChieuDto;
 
@@ -33,6 +34,8 @@ public interface PhimService {
 	Phim getPhimById(Long id);
 
 	XuatChieu addXuatChieu( AddXuatChieuDto dto);
+
+	List<XuatChieu> findXuatChieuByPhimIdCumRapId( Long phimId,Long cumRapId);
 
 	
 

@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.BookingMovieTicket.Phim.Dto.AddPhimDto;
 import com.example.BookingMovieTicket.Phim.Dto.AddPhimLichChieuDto;
 import com.example.BookingMovieTicket.Phim.Dto.AddXuatChieuDto;
+import com.example.BookingMovieTicket.Phim.Dto.LayXuatChieuTheoPhimVaCumRapDto;
 import com.example.BookingMovieTicket.Phim.Dto.PhimDto;
 import com.example.BookingMovieTicket.Phim.Dto.addLichChieuDto;
 
@@ -120,6 +121,13 @@ public class PhimController {
 		
 		return xuatChieu;
 		
+	}
+	@GetMapping("/user/xuat-chieu/phimid={phimId}&cumrapid={cumRapId}")
+	public Object layXuatChieuTheoPhimVaCumRap(@PathVariable("phimId") Long phimId,@PathVariable("cumRapId") Long cumRapId) {
+		
+		List<XuatChieu> lstXuatChieu=phimService.findXuatChieuByPhimIdCumRapId(phimId,cumRapId);
+		
+		return lstXuatChieu;
 	}
 	
 	

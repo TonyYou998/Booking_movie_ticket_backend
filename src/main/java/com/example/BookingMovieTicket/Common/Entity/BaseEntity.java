@@ -15,6 +15,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -25,15 +26,17 @@ public class BaseEntity {
 	@Column(updatable = false,unique = true)
 	
 	protected Long id;
-	
+	@JsonIgnore
 	@CreatedDate
 	@DateTimeFormat
-	@JsonFormat
+//	@JsonFormat
+
 	protected LocalDateTime createAt;
-	
+	@JsonIgnore
 	@LastModifiedDate
 	@DateTimeFormat
-	@JsonFormat
+//	@JsonFormat
+	
 	protected LocalDateTime updateAt;
 
 	public Long getId() {
