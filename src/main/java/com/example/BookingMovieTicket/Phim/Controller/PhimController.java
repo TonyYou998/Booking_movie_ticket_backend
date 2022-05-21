@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.BookingMovieTicket.Common.ResponseHandler;
 import com.example.BookingMovieTicket.Phim.Dto.AddPhimDto;
 import com.example.BookingMovieTicket.Phim.Dto.AddPhimLichChieuDto;
 import com.example.BookingMovieTicket.Phim.Dto.AddXuatChieuDto;
@@ -127,7 +129,7 @@ public class PhimController {
 		
 		List<XuatChieu> lstXuatChieu=phimService.findXuatChieuByPhimIdCumRapId(phimId,cumRapId);
 		
-		return lstXuatChieu;
+		return ResponseHandler.getResponse(lstXuatChieu,HttpStatus.OK);
 	}
 	
 	
