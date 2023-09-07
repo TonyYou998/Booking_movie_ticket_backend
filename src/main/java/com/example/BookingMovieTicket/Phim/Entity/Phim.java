@@ -5,15 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.example.BookingMovieTicket.Common.Entity.BaseEntity;
@@ -33,9 +25,10 @@ import lombok.Setter;
 @Table(name="phim")
 public class Phim extends BaseEntity {
 	@NotNull
-	
+	@Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci")
 	private String tenPhim;
 	@NotNull
+	@Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci")
 	private String theLoai;
 	@NotNull
 	private Integer doTuoi;

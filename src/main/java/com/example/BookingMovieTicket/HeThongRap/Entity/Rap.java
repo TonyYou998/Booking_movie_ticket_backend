@@ -12,8 +12,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.example.BookingMovieTicket.Common.Entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 @Entity
@@ -22,10 +24,11 @@ import lombok.Setter;
 @Table(name = "rap")
 public class Rap extends BaseEntity{
 	@NotNull
-	@Column(unique = true)
+	@Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci")
 	private String tenRap;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cum_rap_id")
+	@JsonBackReference
 	private CumRap cumRap;
 	@OneToMany(mappedBy = "id")
 	@JsonIgnore

@@ -35,9 +35,10 @@ public class UserSeeder {
 	private void seedUserTable() {
 		// TODO Auto-generated method stub
 			
-		String sql="select  *\r\n"
-				+ "from users u \r\n"
-				+ "where u.role=\"ROLE_ADMIN\"";
+//		String sql="select  *\r\n"
+//				+ "from users u \r\n"
+//				+ "where u.role=\"ROLE_ADMIN\"";
+		String sql="SELECT * FROM users WHERE role='ROLE_ADMIN'";
 		List<User> u=jdbcTemplate.query(sql,(ResultSet,rowNum)->null);
 		if( u.size()<=0) {
 			User newUser=new User();

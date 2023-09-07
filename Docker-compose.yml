@@ -1,0 +1,19 @@
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=bookingdb
+    ports:
+      - "3306:3306"
+    networks:
+      - uit
+    volumes:
+      - crmDb:/var/lib/mysql
+
+
+volumes:
+  crmDb:
+networks:
+  uit:
+    driver: bridge

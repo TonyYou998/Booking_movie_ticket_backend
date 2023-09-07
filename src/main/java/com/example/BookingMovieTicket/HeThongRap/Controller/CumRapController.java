@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.example.BookingMovieTicket.HeThongRap.Dto.CumRapDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.BookingMovieTicket.HeThongRap.Dto.CreateCumRapDto;
 import com.example.BookingMovieTicket.HeThongRap.Entity.CumRap;
@@ -36,12 +36,13 @@ public class CumRapController {
 		
 		
 	}
-	@GetMapping("/user/cumrap/getall/")
-	public Object getCumRap(@RequestParam String heThongRapId) {
-		List<CumRap> lstCumRap=service.findListCumRapByHrThongRapId(heThongRapId);
+	@GetMapping("/user/cumrap/getall/heThongRapId")
+	@ResponseBody
+	public List<CumRapDto> getCumRap(@RequestParam(value="id") String heThongRapId)  {
+		List<CumRapDto> lstCumRap=service.findListCumRapByHrThongRapId(heThongRapId);
 		return lstCumRap;
-		
-		
+
+
 	}
 	
 	

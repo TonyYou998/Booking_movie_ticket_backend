@@ -6,19 +6,21 @@ import javax.validation.constraints.NotEmpty;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
+
 @Getter
 @Setter
 public class AddPhimDto {
 	@NotEmpty
 	private String tenPhim;
-	
 	private String theLoai;
 	private String trailer;
 	private Integer rating;
-	private LocalDateTime ngayPhatHanh;
+	private String ngayPhatHanh;
 	private String moTa;
 	private String hinhAnh;
 	private Integer doTuoi;
+//	private MultipartFile image;
 	
 	
 }

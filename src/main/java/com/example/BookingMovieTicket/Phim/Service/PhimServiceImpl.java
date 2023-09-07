@@ -1,9 +1,12 @@
 package com.example.BookingMovieTicket.Phim.Service;
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +50,10 @@ public class PhimServiceImpl implements PhimService {
 		newPhim.setTenPhim(dto.getTenPhim());
 		newPhim.setTheLoai(dto.getTheLoai());
 		newPhim.setRating(dto.getRating());
-		newPhim.setNgayPhatHanh(dto.getNgayPhatHanh());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+		LocalDateTime formatedNgayPhatHanh = LocalDateTime.parse(dto.getNgayPhatHanh(), formatter);
+		newPhim.setNgayPhatHanh(formatedNgayPhatHanh);
 		newPhim.setMoTa(dto.getMoTa());
 		newPhim.setHinhAnh(dto.getHinhAnh());
 		newPhim.setDoTuoi(dto.getDoTuoi());
@@ -62,32 +68,21 @@ public class PhimServiceImpl implements PhimService {
 	@Override
 	public LichChieu addLichChieu(addLichChieuDto dto) {
 		// TODO Auto-generated method stub
-		
-		 
 		 CumRap cumRap=cumRapRepository.findById(dto.getCumRapId()).get();
 		 LichChieu newLichChieu=new LichChieu();
 //		 newLichChieu.addPhim(phim);
 		 newLichChieu.setCumRap(cumRap);
 		 newLichChieu.setNgayChieu(dto.getNgayChieu());
 		 lichChieuRepository.save(newLichChieu);
-		 
-		 
-		 
-		
-		
 		return newLichChieu;
 	}
 	@Override
 	public Phim addPhimLichChieu(AddPhimLichChieuDto dto) {
 		// TODO Auto-generated method stub
 		Phim phim=phimRepository.findById(dto.getPhimId()).get();
-		
 		LichChieu lichChieu=lichChieuRepository.findById(dto.getLichChieuId()).get();
-		
 		phim.setPhimLichChieu(lichChieu);
 		phimRepository.save(phim);
-		
-		
 		return phim;
 	}
 	@Override

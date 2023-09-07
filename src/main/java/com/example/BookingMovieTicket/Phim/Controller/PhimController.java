@@ -8,14 +8,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.util.DigestUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.BookingMovieTicket.Common.ResponseHandler;
@@ -37,27 +32,29 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class PhimController {
 	PhimService phimService;
 	private final String uploadDir="/src/main/resources/static/upload/";
-//	private final String domainName="http://localhost:8080/";
-	private final String domainName="https://bookingmovieapi.herokuapp.com/";
+	private final String domainName="http://localhost:8080/";
+//	private final String domainName="https://bookingmovieapi.herokuapp.com/";
 
 	public  PhimController(PhimService phimService) {
 		// TODO Auto-generated constructor stub
 		this.phimService=phimService;
 	}
 	@PostMapping("/admin/phim/add")
-	public Object addPhim( @RequestParam("addPhimDto") String model,@RequestParam("file") MultipartFile file) {
+	public Object addPhim(@ModelAttribute AddPhimDto dto,@RequestParam("image") MultipartFile image) {
 		try {
 			ObjectMapper mapper= new  ObjectMapper();
 			mapper.findAndRegisterModules();
-			AddPhimDto dto=mapper.readValue(model, AddPhimDto.class);
+//			AddPhimDto dto=mapper.readValue(model, AddPhimDto.class);
 			
-			String fileName=file.getOriginalFilename();
+			String fileName= DigestUtils.md5DigestAsHex(image.getOriginalFilename().getBytes());
+			String[] fileNameArray= image.getOriginalFilename().split("\\.");
+			fileName+="."+fileNameArray[1];
 			String userDirectory=Paths.get("").toAbsolutePath().toString();
 			Path folderPath=Paths.get(userDirectory+uploadDir);
 			if(!Files.exists(folderPath))
 					Files.createDirectories(folderPath);
 			Path path=Paths.get(userDirectory+uploadDir+fileName);
-			Files.write(path, file.getBytes());
+			Files.write(path, image.getBytes());
 			final String savedPath=domainName+fileName;
 			dto.setHinhAnh(savedPath);
 			Phim newPhim=phimService.addNewPhim(dto);
@@ -91,8 +88,6 @@ public class PhimController {
 			Phim newPhim=phimService.addPhimLichChieu(dto);
 		
 		return dto;
-		
-		
 	}
 	@GetMapping("/user/phim/lich-chieu/{id}")
 	public Object getPhimTheoLichChieu(@PathVariable("id") Long id ) {
