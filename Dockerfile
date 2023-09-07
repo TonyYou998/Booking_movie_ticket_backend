@@ -1,5 +1,5 @@
-FROM openjdk:latest
-COPY target/BookingMovieTicket-0.0.2-SNAPSHOT.jar app.jar
-WORKDIR /app
+FROM openjdk:11-jdk-slim
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
 EXPOSE 8080
-CMD ["java","-jar","app.jar"]
+ENTRYPOINT ["java", "-jar", "/app.jar"]
