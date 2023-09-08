@@ -1,7 +1,10 @@
 package com.example.BookingMovieTicket.Seeders;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -21,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 @Transactional
 public class HeThongRapSeeder {
+	private final Logger logger= LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	private final HeThongRapRepository repository;
@@ -34,10 +38,8 @@ public class HeThongRapSeeder {
 
 	private void seedHeThongRap() {
 		// TODO Auto-generated method stub
-		
 		String query="SELECT  * FROM he_thong_rap";
 		List<HeThongRap> heThongRap=jdbcTemplate.query(query,(ResultSet,rowNum)->null);
-		
 		if(heThongRap.size()<=0) {
 			HeThongRap newHeThongRap=new HeThongRap();
 			HeThongRap newHeThongRap2=new HeThongRap();
@@ -59,11 +61,22 @@ public class HeThongRapSeeder {
 			newHeThongRap3.setHinhAnh("https://movie0706.cybersoft.edu.vn/hinhanh/cinestar.png");
 			newHeThongRap.setHinhAnh("https://movie0706.cybersoft.edu.vn/hinhanh/cgv.png");
 			newHeThongRap2.setHinhAnh("https://movie0706.cybersoft.edu.vn/hinhanh/bhd-star-cineplex.png");
-			repository.save(newHeThongRap);
-			repository.save(newHeThongRap2);
-			repository.save(newHeThongRap3);
-			repository.save(newHeThongRap4);
-			repository.save(newHeThongRap5);
+			List<HeThongRap> lstHeThongRap=new ArrayList<>();
+			lstHeThongRap.add(newHeThongRap);
+			lstHeThongRap.add(newHeThongRap2);
+			lstHeThongRap.add(newHeThongRap3);
+			lstHeThongRap.add(newHeThongRap4);
+			lstHeThongRap.add(newHeThongRap5);
+			try {
+				long start=System.currentTimeMillis();
+				repository.saveAll(lstHeThongRap);
+				long end=System.currentTimeMillis();
+				logger.info("It took {}ms to execute",(end-start));
+			}
+			catch (){
+
+			}
+
 		}
 		else
 			System.out.println("he thong rap already exist");
