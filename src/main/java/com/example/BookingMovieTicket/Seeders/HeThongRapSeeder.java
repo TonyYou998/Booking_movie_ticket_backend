@@ -67,21 +67,12 @@ public class HeThongRapSeeder {
 			lstHeThongRap.add(newHeThongRap3);
 			lstHeThongRap.add(newHeThongRap4);
 			lstHeThongRap.add(newHeThongRap5);
-			try {
 				long start=System.currentTimeMillis();
 				repository.saveAll(lstHeThongRap);
 				long end=System.currentTimeMillis();
 				logger.info("It took {}ms to execute",(end-start));
-			}
-			catch (){
-
-			}
-
 		}
-		else
-			System.out.println("he thong rap already exist");
-	
-		
+
 		
 	}
 

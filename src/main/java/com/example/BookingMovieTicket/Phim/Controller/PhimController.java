@@ -31,8 +31,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping("/api/v1")
 public class PhimController {
 	PhimService phimService;
-	private final String uploadDir="/src/main/resources/static/upload/";
-	private final String domainName="http://localhost:8080/";
+
+
 //	private final String domainName="https://bookingmovieapi.herokuapp.com/";
 
 	public  PhimController(PhimService phimService) {
@@ -41,29 +41,20 @@ public class PhimController {
 	}
 	@PostMapping("/admin/phim/add")
 	public Object addPhim(@ModelAttribute AddPhimDto dto,@RequestParam("image") MultipartFile image) {
-		try {
-			ObjectMapper mapper= new  ObjectMapper();
-			mapper.findAndRegisterModules();
-//			AddPhimDto dto=mapper.readValue(model, AddPhimDto.class);
-			
-			String fileName= DigestUtils.md5DigestAsHex(image.getOriginalFilename().getBytes());
-			String[] fileNameArray= image.getOriginalFilename().split("\\.");
-			fileName+="."+fileNameArray[1];
-			String userDirectory=Paths.get("").toAbsolutePath().toString();
-			Path folderPath=Paths.get(userDirectory+uploadDir);
-			if(!Files.exists(folderPath))
-					Files.createDirectories(folderPath);
-			Path path=Paths.get(userDirectory+uploadDir+fileName);
-			Files.write(path, image.getBytes());
-			final String savedPath=domainName+fileName;
-			dto.setHinhAnh(savedPath);
-			Phim newPhim=phimService.addNewPhim(dto);
+//			String fileName= DigestUtils.md5DigestAsHex(image.getOriginalFilename().getBytes());
+//			String[] fileNameArray= image.getOriginalFilename().split("\\.");
+//			fileName+="."+fileNameArray[1];
+//			String userDirectory=Paths.get("").toAbsolutePath().toString();
+//			Path folderPath=Paths.get(userDirectory+uploadDir);
+//			if(!Files.exists(folderPath))
+//					Files.createDirectories(folderPath);
+//			Path path=Paths.get(userDirectory+uploadDir+fileName);
+//			Files.write(path, image.getBytes());
+//			final String savedPath=domainName+fileName;
+//			dto.setHinhAnh(savedPath);
+			Phim newPhim=phimService.addNewPhim(dto,image);
 			return newPhim;
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
-			return "loi";
-		}
+
 		
 
 		
