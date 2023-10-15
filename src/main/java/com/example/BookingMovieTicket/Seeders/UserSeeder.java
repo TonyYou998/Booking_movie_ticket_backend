@@ -3,9 +3,12 @@ package com.example.BookingMovieTicket.Seeders;
 import java.sql.ResultSet;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -16,6 +19,7 @@ import com.example.BookingMovieTicket.User.Repository.UserRepository;
 
 @Component
 public class UserSeeder {
+	private final Logger logger= LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	private PasswordEncoder encoder;
@@ -27,8 +31,9 @@ public class UserSeeder {
 		this.repository=repository;
 	}
 	 @EventListener
+	 @Order(0)
 	 public void seed(ContextRefreshedEvent event) {
-		 
+		 logger.info("-------------running user seeder-------------------");
 		 seedUserTable();
 	 }
 

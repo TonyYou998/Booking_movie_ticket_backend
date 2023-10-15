@@ -19,7 +19,7 @@ import lombok.Setter;
 @Table(name="ghe")
 public class Ghe extends  BaseEntity{
 	@NotNull
-	@Column(unique = true)
+	@Column(columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci")
 	private String soGhe;
 	@NotNull
 	private boolean daDat=false;

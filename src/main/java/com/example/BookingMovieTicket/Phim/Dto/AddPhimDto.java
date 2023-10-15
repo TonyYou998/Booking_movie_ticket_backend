@@ -18,9 +18,9 @@ public class AddPhimDto {
 	private Integer rating;
 	private String ngayPhatHanh;
 	private String moTa;
-	private String hinhAnh;
 	private Integer doTuoi;
 //	private MultipartFile image;
+	private String hinhAnh;
 	
 	
 }

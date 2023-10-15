@@ -1,13 +1,16 @@
 package com.example.BookingMovieTicket.Phim.Service;
 
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-import org.springframework.stereotype.Repository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.example.BookingMovieTicket.HeThongRap.Entity.CumRap;
@@ -15,7 +18,6 @@ import com.example.BookingMovieTicket.HeThongRap.Repository.CumRapRepository;
 import com.example.BookingMovieTicket.Phim.Dto.AddPhimDto;
 import com.example.BookingMovieTicket.Phim.Dto.AddPhimLichChieuDto;
 import com.example.BookingMovieTicket.Phim.Dto.AddXuatChieuDto;
-import com.example.BookingMovieTicket.Phim.Dto.LayXuatChieuTheoPhimVaCumRapDto;
 import com.example.BookingMovieTicket.Phim.Dto.PhimDto;
 import com.example.BookingMovieTicket.Phim.Dto.addLichChieuDto;
 
@@ -26,13 +28,21 @@ import com.example.BookingMovieTicket.Phim.Repository.LichChieuRepository;
 import com.example.BookingMovieTicket.Phim.Repository.PhimLichChieuRepository;
 import com.example.BookingMovieTicket.Phim.Repository.PhimRepository;
 import com.example.BookingMovieTicket.Phim.Repository.XuatChieuRepository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
+import org.springframework.web.multipart.MultipartFile;
+
 @Service
+@Transactional
 public class PhimServiceImpl implements PhimService {
+	private final Logger logger= LoggerFactory.getLogger(this.getClass());
 	private PhimRepository phimRepository;
 	private LichChieuRepository lichChieuRepository;
 	private XuatChieuRepository xuatChieuRepository;
 	private CumRapRepository cumRapRepository;
 	private PhimLichChieuRepository phimLichChieuRepository;
+	private final String uploadDir="/src/main/resources/static/upload/";
+	private final String domainName="http://localhost:8080/";
 	public PhimServiceImpl(PhimRepository repository,LichChieuRepository lichChieuRepository,CumRapRepository cumRapRepository,PhimLichChieuRepository phimLichChieuRepository,XuatChieuRepository xuatChieuRepository) {
 		
 		// TODO Auto-generated constructor stub
@@ -43,10 +53,25 @@ public class PhimServiceImpl implements PhimService {
 		this.xuatChieuRepository=xuatChieuRepository;
 	}
 	@Override
-	public Phim addNewPhim(AddPhimDto dto) {
+	public Phim addNewPhim(AddPhimDto dto, MultipartFile image) {
 		// TODO Auto-generated method stub
-		
+
 		Phim newPhim=new Phim();
+		try{
+			String fileName= DigestUtils.md5DigestAsHex(image.getOriginalFilename().getBytes());
+			fileName+="."+image.getOriginalFilename().split("\\.")[1];
+			String userDir= Paths.get("").toAbsolutePath().toString();
+			Path folderPath= Paths.get(userDir+uploadDir);
+			if(!Files.exists(folderPath))
+				Files.createDirectories(folderPath);
+			Path path=Paths.get(userDir+uploadDir+fileName);
+			Files.write(path, image.getBytes());
+			final String savedPath=domainName+fileName;
+			dto.setHinhAnh(savedPath);
+		} catch (IOException e) {
+			logger.info("There is an issue when upload image:{}",e.getMessage());
+			throw new RuntimeException(e);
+		}
 		newPhim.setTenPhim(dto.getTenPhim());
 		newPhim.setTheLoai(dto.getTheLoai());
 		newPhim.setRating(dto.getRating());
@@ -58,6 +83,7 @@ public class PhimServiceImpl implements PhimService {
 		newPhim.setHinhAnh(dto.getHinhAnh());
 		newPhim.setDoTuoi(dto.getDoTuoi());
 		newPhim.setTrailer(dto.getTrailer());
+
 		return phimRepository.save(newPhim);
 	}
 	@Override

@@ -34,13 +34,6 @@ public class RapController {
 		if(newRap !=null)
 		return newRap;
 		return "loi";
-		
-		
-			
-		
-		
-		
-		
 	}
 	@PostMapping("/admin/rap/ghe/create")
 	public Object createSeat(@Valid @RequestBody CreateSeatDto dto,BindingResult err) {
@@ -50,9 +43,9 @@ public class RapController {
 		if(ghe !=null)
 			return ghe;
 		return "loi";
-		
-		
-		
+	}
+	public Object getRapDetail(){
+
 	}
 	
 
