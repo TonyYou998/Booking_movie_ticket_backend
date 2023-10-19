@@ -1,8 +1,8 @@
 package com.example.BookingMovieTicket.Phim.Entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -54,7 +54,7 @@ public class Phim extends BaseEntity {
 	@NotNull
 	private String trailer;
 	@NotNull
-	private LocalDateTime ngayPhatHanh;
+	private LocalDate ngayPhatHanh;
 	private Integer rating;
 //	@JsonIgnore
 //	@OneToMany(mappedBy = "id")

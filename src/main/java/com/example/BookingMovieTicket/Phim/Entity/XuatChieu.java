@@ -1,5 +1,6 @@
 package com.example.BookingMovieTicket.Phim.Entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public class XuatChieu extends BaseEntity{
 	@NotNull
 	private LocalDateTime thoiGianKetThuc;
 	@NotNull
-	private LocalDateTime ngayChieu;
+	private LocalDate ngayChieu;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "lich_chieu_id")
 	private LichChieu lichChieu;

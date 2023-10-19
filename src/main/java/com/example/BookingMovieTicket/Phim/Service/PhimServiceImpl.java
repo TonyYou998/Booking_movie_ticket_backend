@@ -5,21 +5,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.example.BookingMovieTicket.Phim.Dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.example.BookingMovieTicket.HeThongRap.Entity.CumRap;
 import com.example.BookingMovieTicket.HeThongRap.Repository.CumRapRepository;
-import com.example.BookingMovieTicket.Phim.Dto.AddPhimDto;
-import com.example.BookingMovieTicket.Phim.Dto.AddPhimLichChieuDto;
-import com.example.BookingMovieTicket.Phim.Dto.AddXuatChieuDto;
-import com.example.BookingMovieTicket.Phim.Dto.PhimDto;
-import com.example.BookingMovieTicket.Phim.Dto.addLichChieuDto;
 
 import com.example.BookingMovieTicket.Phim.Entity.LichChieu;
 import com.example.BookingMovieTicket.Phim.Entity.Phim;
@@ -75,9 +73,9 @@ public class PhimServiceImpl implements PhimService {
 		newPhim.setTenPhim(dto.getTenPhim());
 		newPhim.setTheLoai(dto.getTheLoai());
 		newPhim.setRating(dto.getRating());
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-		LocalDateTime formatedNgayPhatHanh = LocalDateTime.parse(dto.getNgayPhatHanh(), formatter);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		try {
+			LocalDate formatedNgayPhatHanh = LocalDate.parse(dto.getNgayPhatHanh(), formatter);
 		newPhim.setNgayPhatHanh(formatedNgayPhatHanh);
 		newPhim.setMoTa(dto.getMoTa());
 		newPhim.setHinhAnh(dto.getHinhAnh());
@@ -85,6 +83,12 @@ public class PhimServiceImpl implements PhimService {
 		newPhim.setTrailer(dto.getTrailer());
 
 		return phimRepository.save(newPhim);
+		} catch (DateTimeParseException e) {
+			// TODO: handle exception
+			logger.info(e.getMessage());
+			return null;
+		}
+		
 	}
 	@Override
 	public List<PhimDto> getAllPhim() {
@@ -143,16 +147,43 @@ public class PhimServiceImpl implements PhimService {
 		xuatChieuRepository.save(xuatChieu);
 
 		return xuatChieu;
-		
-		
-		
-		
+
 	}
 	@Override
 	public List<XuatChieu> findXuatChieuByPhimIdCumRapId(Long phimId,Long cumRapId) {
 		// TODO Auto-generated method stub
 		List<XuatChieu> lstXuatChieu=xuatChieuRepository.findXuatChieuByPhimIdCumRapId(phimId,cumRapId);
 		return lstXuatChieu;
+	}
+	@Override
+	public LichChieuDtoResponse layLichChieuTheoNgay(String cumRapId, LichChieuDto selectedDate) {
+		// TODO Auto-generated method stub
+		CumRap cumRap=cumRapRepository.findById(Long.parseLong(cumRapId)).orElse(null);
+		try {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate localDate=LocalDate.parse(selectedDate.getNgayChieu(),formatter);
+		LichChieu lichChieu= lichChieuRepository.findByNgayChieuAndCumRap(localDate,cumRap);
+		LichChieuDtoResponse dto=new LichChieuDtoResponse();
+		dto.setCumRapName(lichChieu.getCumRap().getTenCumRap());
+		dto.setNgayChieu(lichChieu.getNgayChieu().toString());
+		List<AddPhimDto> lstPhim=new ArrayList<>();
+		lichChieu.getPhim().forEach(item->{
+			AddPhimDto addPhimDto=new AddPhimDto(item);
+			lstPhim.add(addPhimDto);
+		});
+		dto.setDanhSachPhim(lstPhim);
+		return dto;
+
+		} catch (DateTimeParseException e ) {
+			// TODO: handle exception
+			logger.info(e.getMessage());
+			return null;
+		}
+		catch (RuntimeException e){
+			logger.info(e.getMessage());
+			return  null;
+		}
+		
 	}
 	
 

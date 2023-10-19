@@ -1,5 +1,6 @@
 package com.example.BookingMovieTicket.HeThongRap.Entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,8 +15,6 @@ import javax.validation.constraints.NotNull;
 import com.example.BookingMovieTicket.Common.Entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 @Entity
@@ -30,9 +29,9 @@ public class Rap extends BaseEntity{
 	@JoinColumn(name = "cum_rap_id")
 	@JsonBackReference
 	private CumRap cumRap;
-	@OneToMany(mappedBy = "id")
-	@JsonIgnore
-	private Set<Ghe> ghe;
+	@OneToMany(mappedBy = "rap")
+	@Column(name="danhSachGhe")
+	private List<Ghe> danhSachGhe;
 
 	
 	

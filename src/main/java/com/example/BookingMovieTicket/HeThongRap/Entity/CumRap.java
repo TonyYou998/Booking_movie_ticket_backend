@@ -1,5 +1,6 @@
 package com.example.BookingMovieTicket.HeThongRap.Entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -28,8 +29,10 @@ public class CumRap extends BaseEntity {
 	@NotNull
 	@Column(unique = true,columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci")
 	private String tenCumRap;
+
 	@NotNull
 	private String hinhAnh;
+
 	@NotNull
 	@Column(unique = true,columnDefinition = "VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci")
 	private String diaChi;
@@ -38,14 +41,17 @@ public class CumRap extends BaseEntity {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "he_thong_rap_id")
 	private HeThongRap heThongRap;
+
 //	@JsonIgnore
 	@OneToMany(mappedBy = "cumRap")
 	@Column(name = "danhSachRap")
 	private Set<Rap> danhSachRap;
-//	@JsonIgnore
-//	@OneToOne(cascade =CascadeType.ALL)
-//	@JoinColumn(name="lich_chieu_id",referencedColumnName = "id")
-//	private LichChieu  lichChieu;
+
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "cumRap")
+	@Column(name="danhSachLichChieu")
+	private List<LichChieu>  danhSachLichChieu;
 
 	
 

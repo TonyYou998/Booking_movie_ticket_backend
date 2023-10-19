@@ -1,7 +1,10 @@
 package com.example.BookingMovieTicket.Phim.Entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -26,32 +29,23 @@ import lombok.Setter;
 @Entity
 @Table(name="lich_chieu")
 public class LichChieu extends BaseEntity {
-	@OneToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="cum_rap_id")
 	private CumRap cumRap;
 	
-	private LocalDateTime ngayChieu;
+	private LocalDate ngayChieu;
 	
-//	@OneToMany(mappedBy = "id")
-//	private Set<Phim> phim=new HashSet<Phim>();
-//	mapped to name of property in the inverse table not name of this table 
+	// @OneToMany(mappedBy = "lichChieu")
+	// private List<Phim> phim=new HashSet<Phim>();
+	// mapped to name of property in the inverse table not name of this table 
+
 	@JsonIgnore
 	@ManyToMany(mappedBy = "lichChieu",fetch=FetchType.LAZY)
-	private Set<Phim> phim=new HashSet<Phim>();
+	private List<Phim> phim=new ArrayList<>();
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "id")
 	private Set<XuatChieu> xuatChieu;
-	
-
-
-
-//	public void addPhim(Phim phim) {
-//		this.phim.add(phim);
-//		
-//		
-//	}
-
-
-	
+	private boolean isCompleted=false;
 
 }

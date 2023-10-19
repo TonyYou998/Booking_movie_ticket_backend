@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.example.BookingMovieTicket.Phim.Dto.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.DigestUtils;
 import org.springframework.validation.BindingResult;
@@ -14,23 +15,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.BookingMovieTicket.Common.ResponseHandler;
-import com.example.BookingMovieTicket.Phim.Dto.AddPhimDto;
-import com.example.BookingMovieTicket.Phim.Dto.AddPhimLichChieuDto;
-import com.example.BookingMovieTicket.Phim.Dto.AddXuatChieuDto;
-import com.example.BookingMovieTicket.Phim.Dto.LayXuatChieuTheoPhimVaCumRapDto;
-import com.example.BookingMovieTicket.Phim.Dto.PhimDto;
-import com.example.BookingMovieTicket.Phim.Dto.addLichChieuDto;
-
 import com.example.BookingMovieTicket.Phim.Entity.LichChieu;
 import com.example.BookingMovieTicket.Phim.Entity.Phim;
 import com.example.BookingMovieTicket.Phim.Entity.XuatChieu;
 import com.example.BookingMovieTicket.Phim.Service.PhimService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @RestController
 @RequestMapping("/api/v1")
 public class PhimController {
 	PhimService phimService;
+	
 
 //	private final String domainName="https://bookingmovieapi.herokuapp.com/";
 
@@ -100,6 +93,11 @@ public class PhimController {
 		List<XuatChieu> lstXuatChieu=phimService.findXuatChieuByPhimIdCumRapId(phimId,cumRapId);
 		
 		return ResponseHandler.getResponse(lstXuatChieu,HttpStatus.OK);
+	}
+	@PostMapping("/user/phim/lich-chieu/cum-rap/{cumRapId}")
+	public Object layLichChieuTheoNgay(@PathVariable("cumRapId") String cumRapId,@Valid @RequestBody LichChieuDto selectedDate){
+	 LichChieuDtoResponse lichChieu= phimService.layLichChieuTheoNgay(cumRapId,selectedDate);
+			return lichChieu;
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.example.BookingMovieTicket.Phim.Dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotBlank;
@@ -16,7 +17,7 @@ public class AddXuatChieuDto {
 	private Long phimId;
 	
 	private Long lichChieuId;
-	private LocalDateTime ngayChieu;
+	private LocalDate ngayChieu;
 
 	private LocalDateTime thoiGianBatDau;
 

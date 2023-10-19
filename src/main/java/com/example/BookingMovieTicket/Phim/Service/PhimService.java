@@ -2,11 +2,7 @@ package com.example.BookingMovieTicket.Phim.Service;
 
 import java.util.List;
 
-import com.example.BookingMovieTicket.Phim.Dto.AddPhimDto;
-import com.example.BookingMovieTicket.Phim.Dto.AddPhimLichChieuDto;
-import com.example.BookingMovieTicket.Phim.Dto.AddXuatChieuDto;
-import com.example.BookingMovieTicket.Phim.Dto.PhimDto;
-import com.example.BookingMovieTicket.Phim.Dto.addLichChieuDto;
+import com.example.BookingMovieTicket.Phim.Dto.*;
 
 import com.example.BookingMovieTicket.Phim.Entity.LichChieu;
 import com.example.BookingMovieTicket.Phim.Entity.Phim;
@@ -34,6 +30,8 @@ public interface PhimService {
 	XuatChieu addXuatChieu( AddXuatChieuDto dto);
 
 	List<XuatChieu> findXuatChieuByPhimIdCumRapId( Long phimId,Long cumRapId);
+
+    LichChieuDtoResponse layLichChieuTheoNgay(String cumRapId, LichChieuDto selectedDate);
 
 	
 

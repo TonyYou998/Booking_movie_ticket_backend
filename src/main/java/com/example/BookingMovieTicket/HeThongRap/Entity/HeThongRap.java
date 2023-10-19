@@ -24,8 +24,8 @@ public class HeThongRap extends BaseEntity {
 	@NotNull
 	private String hinhAnh;
 	@JsonIgnore
-	@OneToMany(mappedBy = "id")
-	private Set<CumRap> cumRap;
+	@OneToMany(mappedBy = "heThongRap")
+	private Set<CumRap> danhSachCumRap;
 
 
 }
